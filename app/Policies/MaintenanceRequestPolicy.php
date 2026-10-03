@@ -12,6 +12,11 @@ class MaintenanceRequestPolicy
         return $user->isOffice();
     }
 
+    public function view(User $user, MaintenanceRequest $request): bool
+    {
+        return $user->isOffice() || $request->technician_id === $user->id;
+    }
+
     public function assign(User $user, MaintenanceRequest $request): bool
     {
         return $user->isOffice();
